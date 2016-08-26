@@ -1,0 +1,20 @@
+export default function(router){
+	router.map({
+		'/':{
+			component(resolve){
+				require(['./views/index'],resolve)
+			}
+		},
+		'/index':{
+			component(resolve){
+				require(['./views/index'],resolve)
+			}
+		},
+		'/exam/:uid':{
+			name:'exam',
+			component(resolve){
+				require(['./views/exam'],resolve)
+			}
+		}
+	})
+}

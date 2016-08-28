@@ -52,7 +52,7 @@
 		ready(){
 			let first = this.list[0],_this = this;
 			this._question(first)
-			console.log('用户id:',this.$route.params.uid)
+			console.log('用户i:',this.$route.params.uid)
 		},
 		methods:{
 			_question:function(q){
@@ -82,7 +82,7 @@
 				console.log(e)
 			},
 			close:function(){
-				this._question(this.list[this.qIndex]);
+				// this._question(this.list[this.qIndex]);
 				this.flag = true;
 			},
 			plus:function(){
@@ -108,6 +108,9 @@
 	}
 	.main{
 		padding: 0 10px;
+		background: url(../assets/img/article_bg.png) no-repeat top;
+		background-size: contain;
+		height: 26.25rem;
 	}
 	.fadeInBottom-enter {
 	  animation:fadeInBottom-in 0.5s ease;
@@ -122,5 +125,8 @@
         opacity: 1;
         transform: none
     }
+}
+.weui_cells_title{
+	color: #000;
 }
 </style>

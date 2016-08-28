@@ -8,21 +8,24 @@
 </template>
 
 <script>
-import GroupTitle from '../group-title/'
-
 export default {
-  components: {
-    GroupTitle
-  },
   props: {
     title: String,
     titleColor: String
+  },
+  ready(){
+    console.log('titleColor:'+this.titleColor)
   }
 }
 </script>
 
 <style>
 .no_group_title {
-  margin-top:15px;
+  margin-top:18px;
+}
+.weui_cells_title{
+  color: #000;
+  font-size: 1rem;
+  padding-top: 1.5rem;
 }
 </style>

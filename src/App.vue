@@ -15,7 +15,6 @@
   body {
     font-family: Helvetica, sans-serif;
     background:url(./assets/img/bg.jpg) repeat;
-    padding:.9375rem;
   }
   img{
     width: 100%;

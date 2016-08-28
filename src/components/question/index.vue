@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div v-if="questionType===0" class="answer1">
-			<group :title="question">
+			<group :title="question" title-color="#000;">
 				<radio :options="answer" @on-change="choose" :right="right" ></radio>	
 			</group>		
 		</div>

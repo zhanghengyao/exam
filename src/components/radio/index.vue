@@ -1,24 +1,15 @@
 <template>
   <div class="weui_cells_radio">
-    <label :class="{'weui_cell':true, 'weui_cell_radio weui_check_label':true,'r_focus':value==one}" for="radio_{{uuid}}_{{index}}" v-for="(index,one) in options" @click=''>
+    <label :class="{'weui_cell':true, 'weui_cell_radio weui_check_label':true,'access':value==one,'mistake':(one===value)&&wrong}" for="radio_{{uuid}}_{{index}}" v-for="(index,one) in options" @click=''>
       <div class="weui_cell_bd weui_cell_primary">
-        <p>{{one}}</p>
+        <p :class="_itemClass(index,one===value)">{{{one}}}</p>
       </div>
       <div class="weui_cell_ft">
         <input type="radio" class="weui_check" v-model="value" id="radio_{{uuid}}_{{index}}" value="{{one}}">
-        <img :class="{'show':(one===value)&&ok,'hide':!((one===value)&&ok)}" src="../../assets/img/gou.png" alt="">
-        <img :class="{'show':(one===value)&&wrong,'hide':!((one===value)&&wrong)}" src="../../assets/img/cha.png" alt="">
+        <img :class="{'show':(one===value)&&ok,'hide':!((one===value)&&ok)}" src="../../assets/img/hint_correct.png" alt="">
+        <img :class="{'show':(one===value)&&wrong,'hide':!((one===value)&&wrong)}" src="../../assets/img/hint_mistake.png" alt="">
       </div>
     </label>
-    <div class="weui_cell" v-show="fillMode">
-      <div class="weui_cell_hd"><label for="" class="weui_label">{{fillLabel}}</label></div>
-      <div class="weui_cell_bd weui_cell_primary">
-        <input class="weui_input needsclick" type="text" v-model="fillValue" placeholder="{{fillPlaceholder}}" @blur="isFocus=false" @focus="onFocus()">
-      </div>
-      <div class="weui_cell_ft" v-show="value==='' && !isFocus">
-        <i class="weui_icon_warn"></i>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -64,6 +55,12 @@ export default {
     onFocus: function () {
       this.value = this.fillValue || ''
       this.isFocus = true
+    },
+    _itemClass:function(index,flag){
+      let obj = {}
+      obj['item-'+index] = true
+      obj['item-focus-'+index] = flag
+      return obj
     }
   },
   watch: {
@@ -115,13 +112,50 @@ function contains (a, obj) {
 </script>
 
 <style scoped>
+.weui_cell_ft{
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 2.75rem;
+  height: 2.75rem;
+}
 .weui_cell_radio > * {
   pointer-events: none;
 }
-.r_focus{
-  -webkit-box-shadow:inset 0 0 10px #0CC;  
-    -moz-box-shadow:inset 0 0 10px #0CC;  
-    box-shadow:inset 0 0 10px #0CC;  
+.access{
+  background: url(../../assets/img/selected.png);
+  color: white;
+}
+.mistake{
+  background: url(../../assets/img/selected_red.png);
+  color: white;
+}
+.item-1,.item-2,.item-3,.item-4,.item-focus-1,.item-focus-2,.item-focus-3,.item-focus-4{
+  padding-left: 18px;
+}
+.item-1{
+  background: url(../../assets/img/letter_a_blue.png) no-repeat left;
+}
+.item-2{
+  background: url(../../assets/img/letter_b_blue.png) no-repeat left;
+}
+.item-3{
+  background: url(../../assets/img/letter_c_blue.png) no-repeat left;
+}
+.item-4{
+  background: url(../../assets/img/letter_d_blue.png) no-repeat left;
+}
+.item-focus-1{
+  background: url(../../assets/img/letter_a_white.png) no-repeat left;
+}
+.item-focus-2{
+  background: url(../../assets/img/letter_b_white.png) no-repeat left;
+}
+.item-focus-3{
+  background: url(../../assets/img/letter_c_white.png) no-repeat left;
+}
+.item-focus-4{
+  background: url(../../assets/img/letter_d_white.png) no-repeat left;
 }
 .show{
   display: block;

@@ -24,7 +24,7 @@ export default {
   margin-top:18px;
 }
 .weui_cells_title{
-  color: #000;
+  color: #333;
   font-size: 1rem;
   padding-top: 1.5rem;
 }

@@ -28,5 +28,11 @@ module.exports = {
     // In our experience, they generally work as expected,
     // just be aware of this issue when enabling this option.
     cssSourceMap: false,
+  },
+  app: {
+    env: require('./dev.env'),
+    port: 9090,
+    proxyTable: {},
+    cssSourceMap: false,
   }
 }

@@ -2,7 +2,7 @@
   <div class="weui_cells_radio">
     <label :class="{'weui_cell':true, 'weui_cell_radio weui_check_label':true,'access':value==one,'mistake':(one===value)&&wrong}" for="radio_{{uuid}}_{{index}}" v-for="(index,one) in options" @click=''>
       <div class="weui_cell_bd weui_cell_primary">
-        <p :class="_itemClass(index,one===value)">{{{one}}}</p>
+        <p class="p-l-25"><span :class="_itemClass(index,one===value)"></span>{{{one}}}</p>
       </div>
       <div class="weui_cell_ft">
         <input type="radio" class="weui_check" v-model="value" id="radio_{{uuid}}_{{index}}" value="{{one}}">
@@ -112,6 +112,9 @@ function contains (a, obj) {
 </script>
 
 <style scoped>
+.p-l-25{
+  padding-left: 1.5625rem;  
+}
 .weui_cell_ft{
   position: absolute;
   right: 0;
@@ -119,8 +122,11 @@ function contains (a, obj) {
   width: 2.75rem;
   height: 2.75rem;
 }
+.weui_cell_radio{
+  color: #295E90;
+}
 .weui_cell_radio > * {
-  pointer-events: none;
+  pointer-events: none;  
 }
 .access{
   background: url(../../assets/img/selected.png);
@@ -130,32 +136,40 @@ function contains (a, obj) {
   background: url(../../assets/img/selected_red.png);
   color: white;
 }
-.item-1,.item-2,.item-3,.item-4,.item-focus-1,.item-focus-2,.item-focus-3,.item-focus-4{
-  padding-left: 18px;
+.item-0,.item-1,.item-2,.item-3,.item-focus-0,.item-focus-1,.item-focus-2,.item-focus-3{
+  position: absolute;
+  display: inline-block;
+  width: 2.5rem;
+  height: 2.5rem;
+  top: 0;
+  left: 0;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: left;
+}
+.item-0{
+  background-image: url(../../assets/img/letter_a_blue.png);
 }
 .item-1{
-  background: url(../../assets/img/letter_a_blue.png) no-repeat left;
+  background-image: url(../../assets/img/letter_b_blue.png);
 }
 .item-2{
-  background: url(../../assets/img/letter_b_blue.png) no-repeat left;
+  background-image: url(../../assets/img/letter_c_blue.png);
 }
 .item-3{
-  background: url(../../assets/img/letter_c_blue.png) no-repeat left;
+  background-image: url(../../assets/img/letter_d_blue.png);
 }
-.item-4{
-  background: url(../../assets/img/letter_d_blue.png) no-repeat left;
+.item-focus-0{
+  background-image: url(../../assets/img/letter_a_white.png);
 }
 .item-focus-1{
-  background: url(../../assets/img/letter_a_white.png) no-repeat left;
+  background-image: url(../../assets/img/letter_b_white.png);
 }
 .item-focus-2{
-  background: url(../../assets/img/letter_b_white.png) no-repeat left;
+  background-image: url(../../assets/img/letter_c_white.png);
 }
 .item-focus-3{
-  background: url(../../assets/img/letter_c_white.png) no-repeat left;
-}
-.item-focus-4{
-  background: url(../../assets/img/letter_d_white.png) no-repeat left;
+  background-image: url(../../assets/img/letter_d_white.png);
 }
 .show{
   display: block;

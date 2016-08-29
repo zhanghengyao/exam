@@ -15,6 +15,12 @@ export default function(router){
 			component(resolve){
 				require(['./views/exam'],resolve)
 			}
+		},
+		'result/:uid/:score':{
+			name:'result',
+			component(resolve){
+				require(['./views/result'],resolve)
+			}
 		}
 	})
 }

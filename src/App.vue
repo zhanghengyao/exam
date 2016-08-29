@@ -1,8 +1,6 @@
 <template>
   <div>
-    <router-view
-    :transition="transitions"
-    transition-mode="out-in"></router-view>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -13,7 +11,7 @@
 </style>
 <style type="text/css">  
   body {
-    font-family: Helvetica, sans-serif;
+    font-family: Helvetica, sans-serif,微软雅黑;
     background:url(./assets/img/bg.jpg) repeat;
   }
   img{

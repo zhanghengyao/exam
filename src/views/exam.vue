@@ -3,13 +3,17 @@
 		<progress :percent.sync="percentNum"></progress>
 		<div class="main">
 			<question :class="{'fadeInBottom-enter':flag}" :question="question" :question-type="questionType" :answer="answer" :right="right" @on-change="change" @on-plus="plus"></question>
-			<flexbox class="mt-10">
-		        <flexbox-item>
-		          <x-button v-if="!isLast" :disabled="flag" :type="buttonType" @click="nextQuestion">确定</x-button>
-		          <x-button v-if="isLast" type="primary" @click="finish">交卷</x-button>
-		        </flexbox-item>
-	      	</flexbox>
+			<div class="mt-10 operation">
+				<a v-if="!isLast" v-show="!flag" class="btn_next" @click.prevent="nextQuestion"></a>
+				<a v-if="!isLast" v-show="flag" class="btn_next_disabled"></a>
+				<a v-if="isLast" class="btn_finish" v-link="{ name: 'result', params: { uid:userId,score:result }}"></a>
+			</div>			
       	</div>
+      	<footer>
+      		<div class="float_background"></div>
+			<div :class="{'f_left':!isLast,'f_left_last':isLast}"></div>
+			<div class="f_right">第{{qIndex}}页</div>
+		</footer>
       	<toast :show.sync="show" type="text" @on-close="close">准备进入下一题</toast>
 	</div>
 </template>
@@ -46,13 +50,15 @@
 				buttonType	 : 'default',
 				show		 : false,
 				result		 : 0,
-				list 		 : []
+				list 		 : [],
+				userId		 : null
 			}
 		},
 		ready(){
 			let first = this.list[0],_this = this;
 			this._question(first)
-			console.log('用户i:',this.$route.params.uid)
+			this.userId = this.$route.params.uid;
+			console.log('用户id:',this.$route.params.uid)
 		},
 		methods:{
 			_question:function(q){
@@ -75,6 +81,7 @@
 			},
 			finish:function(){
 				alert('总成绩：'+this.result)
+				this.$route
 			},
 			change:function(e){
 				this.flag = false
@@ -82,7 +89,7 @@
 				console.log(e)
 			},
 			close:function(){
-				// this._question(this.list[this.qIndex]);
+				this._question(this.list[this.qIndex]);
 				this.flag = true;
 			},
 			plus:function(){
@@ -103,8 +110,67 @@
 	}
 </script>
 <style scoped>
+.float_background{
+	background: url(../assets/img/bottom_picture.png) no-repeat top;
+	background-size: contain;
+	width: 100%;
+	height: 5rem;
+	position: absolute;
+	top:-4.3rem;
+}
+.f_left,.f_left_last{
+	float: left;
+	margin-left: .9375rem;	
+	background-repeat: no-repeat;
+	background-position: left;
+	background-size: contain;
+	width: 11.25rem;
+	height: 2.25rem;
+}
+.f_left{
+	background-image: url(../assets/img/bototm_motto_1.png);
+}
+.f_left_last{
+	background-image: url(../assets/img/bototm_motto_2.png);
+}
+.f_right{
+	float: right;
+	margin-right: .9375rem;
+	font-size: .875rem;
+	color: white;
+}
+  footer{
+  background-image: url(../assets/img/bottom.png);
+  background-size: cover;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 2.1875rem;
+  line-height: 2.1875rem;
+}
+	.btn_next,.btn_next_disabled,.btn_finish{
+		background-repeat: no-repeat;
+		background-size: contain;
+		background-position: center;
+		width: 8rem;
+		height: 3.125rem;
+		display: inline-block;
+	}
+	.btn_next{
+		background-image: url(../assets/img/btn_next.png);		
+	}
+	.btn_next_disabled{
+		background-image: url(../assets/img/btn_next_disabled.png);
+	}
+	.btn_finish{
+		background-image: url(../assets/img/btn_submit.png);
+	}
 	.mt-10{
 		margin-top: 10px;
+	}
+	.operation{
+		text-align: center;
 	}
 	.main{
 		padding: 0 10px;
